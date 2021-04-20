@@ -1,6 +1,7 @@
 
 
 
+
 ph_num = str(input("input your phone number 10 digits:"))
 while True:
     if ph_num.isdigit() !=True:
