@@ -1,5 +1,6 @@
 import math
 
+
 c = float(input('input 1st number='))
 b = float(input('input 2nd number='))
 print("choose act", '* for Multiplication', "/ for Division", '- for Subtraction', "+ for Addition",
