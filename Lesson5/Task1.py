@@ -1,4 +1,5 @@
 import random
+
 i=0
 l=[]
 while i<10:
