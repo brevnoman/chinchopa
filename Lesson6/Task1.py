@@ -1,7 +1,4 @@
 s=input("input your string\n")
 l=s.split(' ')
-d={}
-for i in l:
-    if i!='':
-        d[i]=l.count(i)
+d={i:l.count(i) for i in l if i!=''}
 print(d)
