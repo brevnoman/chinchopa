@@ -7,8 +7,11 @@ p1=list(stock.values())
 o1=list(prices.values())
 print(o)
 print(p)
+total=0
 table=PrettyTable()
 table.field_names=["Title:", "Amount:", "Price for one piece:", "Cost:"]
 for i in range(len(p)):
     table.add_row([p[i], p1[i], o1[i], p1[i]*o1[i]])
+    total+=p1[i]*o1[i]
 print(table)
+print("Total price:",total)
