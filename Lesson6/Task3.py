@@ -11,5 +11,10 @@
 # print(spisok)
 
 # 2 Variant
-spisok=[tuple(i for i in range(1,11)),tuple(i*i for i in range(1,11))]
-print (spisok)
+#spisok=[tuple(i for i in range(1,11)),tuple(i*i for i in range(1,11))]
+#print (spisok)
+# 3 Variant
+list1 = []
+for i in range(1, 11):
+    list1.append((i, i**2))
+print(list1)
