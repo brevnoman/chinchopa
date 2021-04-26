@@ -18,6 +18,5 @@
 # for i in range(1, 11):
 #     list1.append((i, i**2))
 # 3 Variant
-list2=list((i,i**2) for i in range(1,11))
+list2=[(i,i**2) for i in range(1,11)]
 print(list2)
-
