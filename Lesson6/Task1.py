@@ -4,6 +4,4 @@ d={}
 for i in l:
     if i!='':
         d.setdefault(i,l.count(i))
-    else:
-        break
 print(d)
