@@ -3,5 +3,5 @@ l=s.split(' ')
 d={}
 for i in l:
     if i!='':
-        d.setdefault(i,l.count(i))
+        d[i]=l.count(i)
 print(d)
