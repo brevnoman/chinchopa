@@ -1,6 +1,4 @@
-def favorite_movie():
+def favorite_movie(movie_name=input("What is your favorite movie?\n")):
     print(f"Your favorite movie is {movie_name}")
 
-
-movie_name = input("What is your favorite movie?\n")
 favorite_movie()
