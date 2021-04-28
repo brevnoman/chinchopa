@@ -4,7 +4,7 @@ chose = ""
 
 def make_operation():
     while True:
-        choose = input("choose one of following operations\n +, -, *")
+        choose = numbers_list[0]
         if choose == "+":
             addition()
             break
@@ -14,35 +14,33 @@ def make_operation():
         elif choose == "*":
             multiplication()
             break
-        else:
-            print("you can chose only the suggested options")
 
 
 def addition():
     result = 0
-    for i in numbers_list:
-        result = result + i
+    for i in numbers_list[1:]:
+        result = result + int(i)
     print(result)
 
 
 def subtraction():
     result = 0
-    for i in numbers_list:
-        result = result - i
+    for i in numbers_list[1:]:
+        result = result - int(i)
     print(result)
 
 
 def multiplication():
     result = 1
-    for i in numbers_list:
-        result = result * i
+    for i in numbers_list[1:]:
+        result = result * int(i)
     print(result)
 
 
 while True:
-    numbers = input("input your numbers through a space\n").split()
-    numbers_list = [int(i) for i in numbers if i.isdecimal()]
-    if len(numbers_list) < 2:
+    numbers = input("input -, + or * first and then numbers through a space\n").split()
+    numbers_list = [i for i in numbers]
+    if len(numbers_list) < 3:
         print("please write more numbers")
         continue
     else:
