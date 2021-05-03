@@ -2,7 +2,6 @@ import json
 
 
 def phonebook():
-    empty_string = ""
     try:
         with open("phonebook.txt", "r") as f:
             phonebook_dict = json.load(f)
