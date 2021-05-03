@@ -2,10 +2,10 @@ import json
 
 
 def write_file(data):
-
+    join=''.join(data)
     with open("myfile.txt", "w") as write:
         # json.dump(your_string+" ", write)
-        write.write(json.dumps(''.join(data)))
+        json.dump(join, write)
 
 
 def open_file():
@@ -15,15 +15,17 @@ def open_file():
 
 
 def main():
+    data=""
     try:
         with open("myfile.txt", "r") as f:
             data = [json.load(f)]
     except Exception:
-        with open("myfile.txt", "r") as f:
-            f.write(json.dumps(f))
+        with open("myfile.txt", "w") as f:
+            json.dump(data, f)
     while True:
         with open("myfile.txt", "r") as f:
             data = [json.load(f)]
+            print(data)
         your_string = input()
         data.append(''.join(your_string+" "))
         write_file(data)
