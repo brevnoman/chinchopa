@@ -1,4 +1,5 @@
 
+
 #task2
 #1вариант
 hi="Hello, my name is {} {}"
