@@ -1,4 +1,5 @@
 
+
 changeable_string = str(input())
 str_len = len(changeable_string)
 while str_len < 2:
