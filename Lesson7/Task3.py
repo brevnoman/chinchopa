@@ -17,21 +17,21 @@ def make_operation():
 
 
 def addition():
-    result = 0
+    result = int(numbers_list[1])
     for i in numbers_list[1:]:
         result = result + int(i)
     print(result)
 
 
 def subtraction():
-    result = 0
+    result = int(numbers_list[1])
     for i in numbers_list[1:]:
         result = result - int(i)
     print(result)
 
 
 def multiplication():
-    result = 1
+    result = int(numbers_list[1])
     for i in numbers_list[1:]:
         result = result * int(i)
     print(result)
