@@ -123,6 +123,8 @@ def add_numb(phonebook_dict):
 
 
 def change(phonebook_dict, i):
+    print("telephone number:", i[0], "\nfirst name:", i[1], "\nlast name:", i[2], "\ncity:",
+                  i[3], "\nstate:", i[4])
     while True:
         your_choose = input("what would you like to change?(telephone number/ first name/ last name/ city/ state):\n")
         if your_choose == "telephone number":
