@@ -13,8 +13,7 @@ def phonebook():
             phonebook_dict = json.load(f)
 
     while True:
-        print(phonebook_dict)
-        menu = input("what would you like to do (find/add/exit)\n")
+        menu = input("what would you like to do (find/add/see list/exit)\n")
         if menu == "find":
             find_choose(phonebook_dict)
             break
@@ -23,6 +22,8 @@ def phonebook():
             break
         elif menu == "exit":
             exit("bye")
+        elif menu == "see list":
+            save_changes(phonebook_dict)
         else:
             print("this is incorrect parameter, try one more time")
 
@@ -33,14 +34,22 @@ def save_changes(phonebook_dict):
     with open("phonebook.txt", "w") as j:
         json.dump(phonebook_dict, j)
     with open("phonebook.txt", 'r') as j:
-        data = [json.load(j)]
-        print(data)
+        data = json.load(j)
+        contact_num=0
+        for i in data:
+            contact_num+=1
+            print(contact_num)
+            print("telephone number:", i[0], "\nfirst name:", i[1], "\nlast name:", i[2], "\ncity:",
+                  i[3], "\nstate:", i[4])
+            print("\n")
+
 
 
 def find_choose(phonebook_dict):
     while True:
+        print("how would you like to find?")
         find_option = input(
-            "how would you like to find (full name/first name/ last name/telephone number/city/state or write exit to close programm)\n")
+            "(full name/first name/ last name/telephone number/city/state or write exit to close program)\n")
         if find_option == "full name":
             full_name = input("write full name:\t").split(" ")
             count = -1
@@ -115,25 +124,24 @@ def add_numb(phonebook_dict):
 
 def change(phonebook_dict, i):
     while True:
-        choose = input("what would you like to change?(telephone number/ first name/ last name/ city/ state):\n")
-        list = [1, 2, 3, 4]
-        if choose == "telephone number":
+        your_choose = input("what would you like to change?(telephone number/ first name/ last name/ city/ state):\n")
+        if your_choose == "telephone number":
             i[0] = input("write new number:\n")
             save_changes(phonebook_dict)
             stay_or_not()
-        elif choose == "first name":
+        elif your_choose == "first name":
             i[1] = input("write new first name:\n")
             save_changes(phonebook_dict)
             stay_or_not()
-        elif choose == "last name":
+        elif your_choose == "last name":
             i[2] = input("write new last name:\n")
             save_changes(phonebook_dict)
             stay_or_not()
-        elif choose == "city":
+        elif your_choose == "city":
             i[3] = input("write new city:\n")
             save_changes(phonebook_dict)
             stay_or_not()
-        elif choose == "state":
+        elif your_choose == "state":
             i[4] = input("write new state:\n")
             save_changes(phonebook_dict)
             stay_or_not()
@@ -141,7 +149,7 @@ def change(phonebook_dict, i):
             print("Wrong option input")
 
 
-def delete(count, phonebook_dict, i):
+def delete(count, phonebook_dict):
     phonebook_dict.remove(phonebook_dict[count])
     save_changes(phonebook_dict)
     stay_or_not()
@@ -154,7 +162,7 @@ def choose(count, phonebook_dict, i):
             change(phonebook_dict, i)
             break
         elif next_move == "delete":
-            delete(count, phonebook_dict, i)
+            delete(count, phonebook_dict)
             break
         elif next_move == "exit":
             exit("bye)")
