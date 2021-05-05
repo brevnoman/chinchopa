@@ -35,14 +35,13 @@ def save_changes(phonebook_dict):
         json.dump(phonebook_dict, j)
     with open("phonebook.txt", 'r') as j:
         data = json.load(j)
-        contact_num=0
+        contact_num = 0
         for i in data:
-            contact_num+=1
+            contact_num += 1
             print(contact_num)
             print("telephone number:", i[0], "\nfirst name:", i[1], "\nlast name:", i[2], "\ncity:",
                   i[3], "\nstate:", i[4])
             print("\n")
-
 
 
 def find_choose(phonebook_dict):
