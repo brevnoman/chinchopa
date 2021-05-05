@@ -1,7 +1,6 @@
 import json
 
 
-
 def phonebook():
     try:
         with open("phonebook.txt", "r") as f:
