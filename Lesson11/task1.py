@@ -19,6 +19,7 @@ class Teacher(Person):
         self.pay = pay
 
 
-teacher = Teacher(1, 2, 3, 4)
-
+teacher = Teacher("Biba", 44, "yes", "dengi")
+student = Student("Boba", 11, "no", "bourgeoisie")
 print(teacher.__dict__)
+print(student.__dict__)
