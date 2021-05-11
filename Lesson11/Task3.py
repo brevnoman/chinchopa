@@ -78,21 +78,102 @@ class ProductStore:
 
 
 def main():
+    p = Product("food", "ramen", 1.5)
+    p1 = Product("Sport", "T-Shirt", 100)
+    p2 = Product("food", "govna", 20)
+    s = ProductStore()
     while True:
-        p = Product("food", "ramen", 1.5)
-        p1 = Product("Sport", "T-Shirt", 100)
-        p2 = Product("food", "govna", 20)
-        s = ProductStore()
+        print("add/ discount/ sell/ income/ see products/ see product info/ exit")
+        choose = input("")
+        if choose == "add":
+            while True:
+                adding = input("choose product")
+                if adding == "p":
+                    amount = int(input("write amount of product"))
+                    s.add(p, amount)
+                    break
+                elif adding == "p1":
+                    amount = int(input("write amount of product"))
+                    s.add(p1, amount)
+                    break
+                elif adding == "p2":
+                    amount = int(input("write amount of product"))
+                    s.add(p2, amount)
+                    break
+                else:
+                    print("there are no such product")
 
-        s.add(p, 20)
-        s.add(p1, 10)
-        s.add(p2, 2)
-        s.set_discount(p1, 15)
-        s.sell_product(p1, 10)
-        s.get_income()
-        s.get_all_products()
-        s.get_product_info(p)
-        g = input()
+        elif choose == "discount":
+            while True:
+                adding = input("choose product")
+                if adding == "p":
+                    percent = int(input("write percent of product"))
+                    s.set_discount(p, percent)
+                    break
+                elif adding == "p1":
+                    percent = int(input("write percent of product"))
+                    s.add(p1, percent)
+                    break
+                elif adding == "p2":
+                    percent = int(input("write percent of product"))
+                    s.add(p2, percent)
+                    break
+                else:
+                    print("there are no such product")
+        elif choose == "sell":
+            while True:
+                adding = input("choose product")
+                if adding == "p":
+                    amount = int(input("write amount of product"))
+                    s.sell_product(p, amount)
+                    break
+                elif adding == "p1":
+                    amount = int(input("write amount of product"))
+                    s.sell_product(p1, amount)
+                    break
+                elif adding == "p2":
+                    amount = int(input("write amount of product"))
+                    s.sell_product(p2, amount)
+                    break
+                else:
+                    print("there are no such product")
+        elif choose == "income":
+            s.get_income()
+        elif choose == "see products":
+            s.get_all_products()
+        elif choose == "see product info":
+            while True:
+                adding = input("choose product")
+                if adding == "p":
+                    s.get_product_info(p)
+                    break
+                elif adding == "p1":
+                    s.get_product_info(p1)
+                    break
+                elif adding == "p2":
+                    s.get_product_info(p2)
+                    break
+                else:
+                    print("there are no such product")
+        elif choose == "exit":
+            break
+        else:
+            print("wrong choose")
+
+        # p = Product("food", "ramen", 1.5)
+        # p1 = Product("Sport", "T-Shirt", 100)
+        # p2 = Product("food", "govna", 20)
+        # s = ProductStore()
+        #
+        # s.add(p, 20)
+        # s.add(p1, 10)
+        # s.add(p2, 2)
+        # s.set_discount(p1, 15)
+        # s.sell_product(p1, 10)
+        # s.get_income()
+        # s.get_all_products()
+        # s.get_product_info(p)
+        # g = input()
 
 
 main()
