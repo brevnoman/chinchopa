@@ -1,49 +1,3 @@
-# import weakref
-#
-#
-# class Product:
-#     instances=[]
-#
-#     def __init__(self, type, name, price):
-#         self.__class__.instances.append(weakref.proxy(self))
-#         self.type = type
-#         self.name = name
-#         self.price = price
-#
-#
-#
-# class ProductStore:
-#
-#     # def __init__(self, product, amount):
-#     #     self.product=product
-#     #     self.amount=amount
-#
-#
-#     def add(product, amount, basket):
-#         try:
-#             basket.setdefault(product.__dict__["name"], basket[product.__dict__["name"]]+amount)
-#         except KeyError:
-#             basket.setdefault(product.__dict__["name"], amount)
-#
-#
-# basket={}
-# while True:
-#
-#     p = Product("food", "ramen", 1.5)
-#     p2 = Product('Sport', 'Football T-Shirt', 100)
-#     # s = ProductStore()
-#     print((issubclass(Product, p))
-#     # ProductStore.add(p, 10, basket)
-#
-#
-#
-#
-#
-#     #
-#     # for instance in Product.instances:
-#     #     print(instance.name)
-#
-
 from prettytable import PrettyTable
 
 
@@ -128,21 +82,21 @@ class ProductStore:
 
 
 def main():
+    while True:
+        p= Product("food", "ramen", 1.5)
+        p1= Product("Sport", "T-Shirt", 100)
+        p2= Product("food", "govna", 20)
+        s=ProductStore()
+
+        s.add(p, 20)
+        s.add(p1, 10)
+        s.add(p2, 2)
+        s.set_discount(p1, 15)
+        s.sell_product(p1, 10)
+        s.get_income()
+        s.get_all_products()
+        s.get_product_info(p)
+        g=input()
 
 
-
-while True:
-    p= Product("food", "ramen", 1.5)
-    p1= Product("Sport", "T-Shirt", 100)
-    p2= Product("food", "govna", 20)
-    s=ProductStore()
-
-    s.add(p, 20)
-    s.add(p1, 10)
-    s.add(p2, 2)
-    s.set_discount(p1, 15)
-    s.sell_product(p1, 10)
-    s.get_income()
-    s.get_all_products()
-    s.get_product_info(p)
-    g=input()
+main()
