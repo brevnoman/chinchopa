@@ -1,15 +1,27 @@
-class Cat:
-
+class Animal:
     def __init__(self):
         pass
     def talk(self):
-        print("meow")
+        if isinstance(self, Dog):
+            print("woof")
+        elif isinstance(self, Cat):
+            print("meow")
 
-class Dog:
+
+class Cat(Animal):
+
     def __init__(self):
+        super().__init__()
         pass
     def talk(self):
-        print("woof")
+        print("meow!")
+
+class Dog(Animal):
+    def __init__(self):
+        super().__init__()
+        pass
+    def talk(self):
+        print("woof!")
 
 class Furniture:
     def __init__(self):
