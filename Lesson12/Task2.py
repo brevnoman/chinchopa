@@ -50,11 +50,10 @@ class Library:
                 print(i.__dict__["name"], i.__dict__["year"], i.__dict__["author"].name)
     #Ne ponyal, no ochen interestno
     def __repr__(self):
-        return f"{Book.__name__}"
+        return "This is Library"
 
     def __str__(self):
-        for i in range(len(self.authors)):
-            return f"{Author.__name__}"
+        return f"here is {len(self.books)} books"
 
 
 
@@ -66,6 +65,12 @@ class Book:
         self.year=year
         self.author=author
         Book.num_of_books+=1
+
+    def __repr__(self):
+        return f"{self.name}, {self.year}, {self.author.name}"
+    def __str__(self):
+        return f"{self.name}, {self.year}"
+
 class Author:
 
     def __init__(self, name, country, birthday):
@@ -74,6 +79,10 @@ class Author:
         self.birthday=birthday
         self.books=[]
 
+    def __repr__(self):
+        return f"{self.name}, {self.country}, {self.birthday}"
+    def __str__(self):
+        return f"{self.books}"
 
 
 author_obj=Author("A", "U", "T")
@@ -81,13 +90,16 @@ author2_obj=Author("E","B","L")
 book_obj=Book("BOOK", 1925, author_obj)
 book2_obj=Book("Cock", 1488, author2_obj)
 l=Library()
-print(str(book_obj))
-print(repr(book_obj))
 book3_obj=Book("NOS", 228, author_obj)
-while True:
 
+while True:
+    print(str(l))
+    print(repr(l))
+    print(str(book3_obj))
+    print(repr(book3_obj))
+    print(str(author_obj))
+    print(repr(author_obj))
     l.add(book_obj)
-    print(author_obj.__dict__)
     l.add(book2_obj)
     l.add(book3_obj)
     l.group_by_author(author_obj)
