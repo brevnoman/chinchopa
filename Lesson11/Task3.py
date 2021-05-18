@@ -11,6 +11,9 @@ class Product:
         self.name = l_name
         self.price = l_price
 
+    def __repr__(self):
+        return f"{self.type}, {self.name}"
+
 
 class ProductStore:
     products = []
@@ -19,62 +22,52 @@ class ProductStore:
     def __init__(self):
         pass
 
-    def add(self, product, amount, ):
-        try:
-            for i in range(len(self.products)):
-                if product.name in self.products[i].values():
-                    self.products[i] = {
-                        "type": product.type,
-                        "name": product.name,
-                        "price": round(product.price * 1.3, 2),
-                        "quantity": self.products[i]["quantity"] + amount
-                    }
-                    break
-            else:
-                raise KeyError
-        except (KeyError, ValueError, TypeError):
+    def add(self, product, amount):
+        for i in self.products:
+            if product.name == i["product"].name:
+                i["quantity"] = i["quantity"] + amount
+                break
+        else:
             self.products.append({
-                "type": product.type,
-                "name": product.name,
+                "product": product,
                 "price": round(product.price * 1.3, 2),
                 "quantity": amount
             })
-        print(self.products)
 
     def set_discount(self, product, percent):
-        for i in range(len(self.products)):
-            print(self.products[i])
-            if product.name in self.products[i].values() or product.type in self.products[i].values():
-                self.products[i]["price"] = self.products[i]["price"] - round(
-                    (self.products[i]["price"] * percent / 100), 2)
-                print(self.products)
+        for i in self.products:
+            if product.name == i["product"].name or product.type in i["product"].type:
+                i["price"] = i["price"] - round(
+                    (i["price"] * percent / 100), 2)
+                return repr(i["product"]), i["price"]
 
     def sell_product(self, product, amount):
-        for i in range(len(self.products)):
-            if product.name in self.products[i].values():
-                if self.products[i]["quantity"] >= amount:
-                    self.income = amount * self.products[i]["price"]
-                    self.products[i]["quantity"] = self.products[i]["quantity"] - amount
+        for i in self.products:
+            if product.name == i["product"].name:
+                if i["quantity"] >= amount:
+                    ProductStore.income += amount * i["price"]
+                    i["quantity"] = i["quantity"] - amount
+                    return "Congratulations on your purchase"
                 else:
-                    print(f"not enough {product.name}'s in stock")
+                    return f"not enough {product.name}'s in stock"
 
     def get_income(self):
-        print(self.income)
+        return self.income
 
     def get_all_products(self):
         table = PrettyTable()
         table.field_names = ["Name", "Quantity"]
         for i in self.products:
-            table.add_row([i["name"], i["quantity"]])
-        print(table)
+            table.add_row([i["product"].name, i["quantity"]])
+        return table
 
     def get_product_info(self, product):
         table = PrettyTable()
         table.field_names = ["Name", "Quantity"]
-        for i in range(len(self.products)):
-            if product.name in self.products[i].values():
-                table.add_row([product.name, self.products[i]["quantity"]])
-        print(table)
+        for i in self.products:
+            if product.name == i["product"].name:
+                table.add_row([product.name, i["quantity"]])
+        return table
 
 
 def main():
@@ -108,15 +101,15 @@ def main():
                 adding = input("choose product")
                 if adding == "p":
                     percent = int(input("write percent of product"))
-                    s.set_discount(p, percent)
+                    print(s.set_discount(p, percent))
                     break
                 elif adding == "p1":
                     percent = int(input("write percent of product"))
-                    s.add(p1, percent)
+                    print(s.add(p1, percent))
                     break
                 elif adding == "p2":
                     percent = int(input("write percent of product"))
-                    s.add(p2, percent)
+                    print(s.add(p2, percent))
                     break
                 else:
                     print("there are no such product")
@@ -125,33 +118,33 @@ def main():
                 adding = input("choose product")
                 if adding == "p":
                     amount = int(input("write amount of product"))
-                    s.sell_product(p, amount)
+                    print(s.sell_product(p, amount))
                     break
                 elif adding == "p1":
                     amount = int(input("write amount of product"))
-                    s.sell_product(p1, amount)
+                    print(s.sell_product(p1, amount))
                     break
                 elif adding == "p2":
                     amount = int(input("write amount of product"))
-                    s.sell_product(p2, amount)
+                    print(s.sell_product(p2, amount))
                     break
                 else:
                     print("there are no such product")
         elif choose == "income":
-            s.get_income()
+            print(s.get_income())
         elif choose == "see products":
-            s.get_all_products()
+            print(s.get_all_products())
         elif choose == "see product info":
             while True:
                 adding = input("choose product")
                 if adding == "p":
-                    s.get_product_info(p)
+                    print(s.get_product_info(p))
                     break
                 elif adding == "p1":
-                    s.get_product_info(p1)
+                    print(s.get_product_info(p1))
                     break
                 elif adding == "p2":
-                    s.get_product_info(p2)
+                    print(s.get_product_info(p2))
                     break
                 else:
                     print("there are no such product")
