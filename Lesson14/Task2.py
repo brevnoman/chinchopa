@@ -1,4 +1,4 @@
-def stop_words(stop_words=list):
+def stop_words(stop_words:list):
     def go_go(f):
         def censure(name):
             new_result = f(name)
@@ -9,7 +9,7 @@ def stop_words(stop_words=list):
     return go_go
 
 
-@stop_words(stop_words=["BMW", "pepsi"])
+@stop_words(["BMW", "pepsi"])
 def create_slogan(name: str) -> str:
     return f"{name} drinks pepsi in his brand new BMW!"
 
