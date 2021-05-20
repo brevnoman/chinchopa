@@ -1,25 +1,15 @@
-class CustomException:
+class CustomException(Exception):
 
     def __init__(self, msg):
-        self.msg=msg
+        self.msg = msg
 
-    def Type(self):
-        print(self.msg)
+    @classmethod
+    def index_error(cls):
+        return cls("Кто вы то, я тут один ...")
 
-    def Index(self):
-        print(self.msg)
+    @classmethod
+    def type_error(cls):
+        return cls('Я уже не челове, я зверь ...')
 
-def main():
-    try:
-        y=[1, "a"]
-        b=y[1]+y[0]
-        c=y[0]-y[3]
-    except (TypeError, IndexError) as error:
-        if error is TypeError:
-            msg=CustomException("Baka, i will not combine strings with nums!!!")
-            msg.Type()
-        else:
-            msg=CustomException("Oni-chan your index is too big for me...")
-            msg.Index()
 
-main()
+raise CustomException.index_error()
