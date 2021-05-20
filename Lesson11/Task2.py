@@ -1,35 +1,38 @@
 class Mathematician:
 
-    def __init__(self, list):
-        self.list = list
+    def __init__(self):
+        pass
 
-    def square_nums(self):
+    @staticmethod
+    def square_nums(num_list):
         result = []
         try:
-            for i in self.list:
+            for i in num_list:
                 i = int(i ** 2)
                 result.append(i)
 
         except ValueError:
             return "you can use only nums"
-        print(result)
+        return result
 
-    def remove_positives(self):
+    @staticmethod
+    def remove_positives(num_list):
         result = []
-        for i in self.list:
+        for i in num_list:
             if int(i) < 0:
                 result.append(i)
-        print(result)
+        return result
 
-    def filter_leaps(self):
+    @staticmethod
+    def filter_leaps(num_num_list):
         result = []
-        for year in self.list:
+        for year in num_num_list:
             if year % 4 == 0 and year % 100 != 0 or year % 400 == 0:
                 result.append(year)
-        print(result)
+        return result
 
 
-years = Mathematician([-12, 2000, 1990, 1900, 2002])
-years.remove_positives()
-years.filter_leaps()
-years.square_nums()
+years = Mathematician()
+print(years.remove_positives([-12, 2000, 1990, 1900, 2002]))
+print(years.filter_leaps([-12, 2000, 1990, 1900, 2002]))
+print(years.square_nums([-12, 2000, 1990, 1900, 2002]))
