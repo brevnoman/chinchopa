@@ -1,4 +1,4 @@
-def stop_words(stop_words:list):
+def stop_words(stop_words: list):
     def go_go(f):
         def censure(name):
             new_result = f(name)
