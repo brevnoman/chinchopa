@@ -1,3 +1,12 @@
+class NeBoss(Exception):
+    def __init__(self, msg):
+        self.msg = msg
+
+    @classmethod
+    def ne_tot_boss(cls):
+        return cls("This is not a boss")
+
+
 class Boss:
 
     def __init__(self, id_, name: str, company: str):
@@ -37,8 +46,14 @@ class Worker:
         self.id_ = id_
         self._name = name
         self._company = company
-        self._boss = boss
+        self._boss = self.__validate(boss)
         boss.workers.append(self)
+
+    def __validate(self, boss):
+        if isinstance(boss, Boss):
+            return boss
+        else:
+            raise NeBoss.ne_tot_boss()
 
     @property
     def worker_name(self):
@@ -70,9 +85,12 @@ class Worker:
 
     @worker_boss.setter
     def worker_boss(self, value: Boss):
-        self._boss.workers.remove(self)
-        self._boss = value
-        value.workers.append(self)
+        if isinstance(value, Boss):
+            self._boss.workers.remove(self)
+            self._boss = value
+            value.workers.append(self)
+        else:
+            raise NeBoss.ne_tot_boss()
 
     @worker_boss.getter
     def worker_boss(self):
