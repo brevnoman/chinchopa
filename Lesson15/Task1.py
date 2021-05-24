@@ -1,3 +1,4 @@
+from validate_email import validate_email
 class DavayPoNovoy(Exception):
     def __init__(self, msg):
         self.msg = msg
@@ -8,17 +9,16 @@ class DavayPoNovoy(Exception):
 
 
 class Email:
-    attributes = ["@", "gmail.com"]
 
     def __init__(self, email):
         self.email = self.validate(email)
 
     @classmethod
     def validate(cls, email):
-        for i in cls.attributes:
-            if i not in email:
-                raise DavayPoNovoy.incorrect_email()
-        return email
+        if not validate_email(email):
+            raise DavayPoNovoy.incorrect_email()
+        else:
+            return email
 
     def __str__(self):
         return f"vashe milo {self.email}"
