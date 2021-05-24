@@ -7,7 +7,7 @@ class WithIndex:
         return self
 
     def __next__(self):
-        if self.start in range(len(self.iterable)):
+        if self.start <= len(self.iterable):
             result = (self.start, self.iterable[self.start])
             self.start += 1
         else:
