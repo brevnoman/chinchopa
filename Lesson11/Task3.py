@@ -2,9 +2,6 @@ from prettytable import PrettyTable
 
 
 class Product:
-    type = None
-    name = None
-    price = None
 
     def __init__(self, l_type, l_name, l_price):
         self.type = l_type
@@ -16,11 +13,11 @@ class Product:
 
 
 class ProductStore:
-    products = []
-    income = 0
+
 
     def __init__(self):
-        pass
+        self.products = []
+        self.income = 0
 
     def add(self, product, amount):
         for i in self.products:
@@ -45,7 +42,7 @@ class ProductStore:
         for i in self.products:
             if product.name == i["product"].name:
                 if i["quantity"] >= amount:
-                    ProductStore.income += amount * i["price"]
+                    self.income += amount * i["price"]
                     i["quantity"] = i["quantity"] - amount
                     return "Congratulations on your purchase"
                 else:
