@@ -1,6 +1,5 @@
 import traceback
 
-
 class ContextManager:
     counter = 0
     opened_files = []
@@ -30,24 +29,3 @@ class ContextManager:
 
     def __str__(self):
         return f"files that was ben opened {self.opened_files}"
-
-
-context = ContextManager("test.txt", "w+")
-
-with context as file_obj:
-    repr(context)
-    str(context)
-    file_obj.write("1")
-
-with context as file_obj:
-    print(repr(context))
-    print(str(context))
-    file_obj.read()
-
-with context as file_obj:
-    print(repr(context))
-    print(str(context))
-    file_obj.read()
-
-print(repr(context))
-print(str(context))
