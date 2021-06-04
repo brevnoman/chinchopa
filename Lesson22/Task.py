@@ -98,7 +98,6 @@ class Ui_MainWindow(object):
         self.division_button.setText(_translate("MainWindow", "/"))
         self.button_delete.setText(_translate("MainWindow", "<"))
 
-
     def add_func(self):
         self.button0.clicked.connect(lambda: self.write_number(self.button0.text()))
         self.button1.clicked.connect(lambda: self.write_number(self.button1.text()))
