@@ -23,10 +23,6 @@ class Boss:
     def boss_name(self, value):
         self._name = value
 
-    @boss_name.getter
-    def boss_name(self):
-        return self._name
-
     @property
     def boss_company(self):
         return self._company
@@ -35,9 +31,9 @@ class Boss:
     def boss_company(self, value):
         self._company = value
 
-    @boss_company.getter
-    def boss_company(self):
-        return self._company
+    def __repr__(self):
+        return f"{self._name}"
+
 
 
 class Worker:
@@ -63,10 +59,6 @@ class Worker:
     def worker_name(self, value):
         self._name = value
 
-    @worker_name.getter
-    def worker_name(self):
-        return self._name
-
     @property
     def worker_company(self):
         return self._company
@@ -74,10 +66,6 @@ class Worker:
     @worker_company.setter
     def worker_company(self, value):
         self._company = value
-
-    @worker_company.getter
-    def worker_company(self):
-        return self._company
 
     @property
     def worker_boss(self):
@@ -92,9 +80,8 @@ class Worker:
         else:
             raise NeBoss.ne_tot_boss()
 
-    @worker_boss.getter
-    def worker_boss(self):
-        return self._company
+    def __repr__(self):
+        return f"{self._name}"
 
 
 print("do")
