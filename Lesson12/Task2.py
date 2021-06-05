@@ -2,15 +2,7 @@ class Library:
     books = []
     authors = []
 
-    def __init__(self):
-        pass
-
-    def add(self):
-        book_name = input("enter book name:\n")
-        book_year = input("enter book year:\n")
-        author_name = input("name of author:\n")
-        author_country = input("enter authors country:\n")
-        author_birthday = input("enter authors birthday:\n")
+    def add(self, book_name, book_year, author_name, author_country, author_birthday):
         author = Author(author_name, author_country, author_birthday)
         book = Book(book_name, book_year, author)
         if len(self.books) < 1:
@@ -21,7 +13,7 @@ class Library:
             Author.num_of_authors += 1
         else:
             for stored_book in self.books:
-                if book.name == stored_book.name and book.year == stored_book.year and book.author.name == stored_book.author.name:
+                if book == stored_book:
                     print("this book is already in our library")
                     break
             else:
@@ -29,7 +21,7 @@ class Library:
                 Book.num_of_books += 1
 
             for i in self.authors:
-                if book.author.name == i.name and book.author.country == i.country and book.author.birthday == i.birthday:
+                if i == book:
                     try:
                         if book.author.books[book.author.books.index(book.name)] in i.books:
                             break
@@ -69,6 +61,7 @@ class Library:
             return "no books of this year"
         return list_of_books
 
+
     def __repr__(self):
         return "This is Library"
 
@@ -90,6 +83,12 @@ class Book:
     def __str__(self):
         return f"{self.name}, {self.year}"
 
+    def __eq__(self, stored_book):
+        if self.name == stored_book.name and self.year == stored_book.year and self.author.name == stored_book.author.name:
+            return True
+        else:
+            return False
+
 
 class Author:
     num_of_authors = 0
@@ -106,6 +105,11 @@ class Author:
     def __str__(self):
         return f"{self.books}"
 
+    def __eq__(self, book):
+        if self.name == book.author.name and self.country == book.author.country and self.birthday == book.author.birthday:
+            return True
+        else:
+            return False
 
 l = Library()
 
@@ -113,7 +117,12 @@ l = Library()
 while True:
     choose = input("choose 'add new book'/'group by author'/'group by year':\n")
     if choose == 'add new book':
-        l.add()
+        book_name = input("enter book name:\n")
+        book_year = input("enter book year:\n")
+        author_name = input("name of author:\n")
+        author_country = input("enter authors country:\n")
+        author_birthday = input("enter authors birthday:\n")
+        l.add(book_name, book_year, author_name, author_country, author_birthday)
     elif choose == 'group by author':
         print(l.group_by_author(input("enter name of author:\n")))
     elif choose == 'group by year':
