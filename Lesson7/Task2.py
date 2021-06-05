@@ -1,15 +1,13 @@
-countries = {}
-
 
 def main():
     country = input("name the country\n")
     capital = input(f"name {country} country capital?\n")
-    make_country(country, capital)
-    print(countries)
+    countries = {}
+    make_country(country, capital, countries)
     want_out()
 
 
-def make_country(country, capital):
+def make_country(country, capital, countries):
     countries.setdefault(country, capital)
     if capital != countries[country]:
         while True:
@@ -22,6 +20,7 @@ def make_country(country, capital):
                 break
             else:
                 print('you should choose only from "yes" or "no"')
+    print(countries)
 
 
 def want_out():
@@ -37,13 +36,7 @@ def want_out():
             print('You can use only "yes" or "no"')
 
 
-
-
 main()
-
-
-
-
 
 #
 # countries={}

@@ -9,5 +9,3 @@ date="15.04"
 me="Dima"
 date="15.04"
 print("Good day",me,"!",date, "is a perfect day to learn some python")
-=======
-print("Good day",me,"!",date, "is a perfect day to learn some python")
