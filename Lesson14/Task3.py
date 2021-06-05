@@ -5,9 +5,7 @@ def arg_rules(type_: type, max_length_: int, contains_: list):
             if type(name) == type_:
                 if len(name) < max_length_:
                     for i in contains_:
-                        if i in name:
-                            pass
-                        else:
+                        if i not in name:
                             return "the name does not fit"
                     return f(name)
 
