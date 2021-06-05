@@ -10,8 +10,7 @@ class Mathematician:
                 result.append(i)
             return result
         except (ValueError, TypeError):
-            print("you can use only nums")
-            pass
+            return "you can use only nums"
 
 
 
@@ -25,8 +24,7 @@ class Mathematician:
                     result.append(i)
             return result
         except (ValueError, TypeError):
-            print("you can use only nums")
-            pass
+            return "you can use only nums"
     @staticmethod
     def filter_leaps(num_list):
         result = []
@@ -36,8 +34,7 @@ class Mathematician:
                     result.append(year)
             return result
         except (ValueError, TypeError):
-            print("you can use only nums")
-            pass
+            return "you can use only nums"
 
 years = Mathematician()
 print(years.remove_positives([-12, 2000, 1990, 1900, 2002]))
