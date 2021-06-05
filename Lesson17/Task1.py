@@ -49,3 +49,11 @@ class TestMathematician(unittest.TestCase):
     def test_filter_leaps(self):
         self.assertEqual(years.filter_leaps([-12, 2000, 1990, 1900, 2002]), "[-12, 2000]")
 
+    def test_square_nums_neg(self):
+        self.assertFalse(years.square_nums([-12, 2000, 1990, 1900, 2002]) == "[14, 400000, 396010, 361000, 400800]")
+
+    def test_remove_positives_neg(self):
+        self.assertFalse(years.remove_positives([-12, 2000, 1990, 1900, 2002]) == "[2000, 1990, 1900, 2002]")
+
+    def test_filter_leaps_neg(self):
+        self.assertFalse(years.filter_leaps([-12, 2000, 1990, 1900, 2002]) == "[1990, 1900, 2002]")
