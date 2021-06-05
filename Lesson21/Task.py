@@ -3,13 +3,13 @@ from typing import List, Tuple
 
 # We assume that all lists passed to functions are same length N
 # answers
-# 1 - n^2
+# 1 - n
 # 2 - 1
-# 3 - log(n)
+# 3 - n^2
 # 4 - n
 # 5 - n^2
-# 6 - n
-def question1(first_list: List[int], second_list: List[int]) -> List[int]: #n^2
+# 6 - log(n)
+def question1(first_list: List[int], second_list: List[int]) -> List[int]: #n
     res: List[int] = []
     for el_first_list in first_list:
         if el_second_list in second_list:
@@ -23,7 +23,7 @@ def question2(n: int) -> int: #1
     return n
 
 
-def question3(first_list: List[int], second_list: List[int]) -> List[int]: #log(n)
+def question3(first_list: List[int], second_list: List[int]) -> List[int]: #n^2
     temp: List[int] = first_list[:]
     for el_second_list in second_list:
         flag = False
@@ -52,7 +52,7 @@ def question5(n: int) -> List[Tuple[int, int]]: #n^2
     return res
 
 
-def question6(n: int) -> int: #n
+def question6(n: int) -> int: #log(n)
     while n > 1:
         n /= 2
     return n
