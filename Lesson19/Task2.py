@@ -12,9 +12,15 @@ class ManagerTest(unittest.TestCase):
         self.assertEqual(str(self.context), "files that was ben opened []")
 
     def test3(self):
-        with open("test.txt", 'w') as file:
+        with ContextManager("test.txt", 'w') as file:
             test_string = "Aboba"
             file.write(test_string)
-        with open("test.txt") as file:
+        with ContextManager("test.txt") as file:
             text = file.read()
             self.assertTrue("Aboba" in text)
+
+    def test4(self):
+        with ContextManager("test.txt", "w") as file:
+            test_string = "Aboba"
+            file.write(test_string)
+        self.assertEqual(ContextManager.counter, 3, "net")
