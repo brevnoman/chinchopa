@@ -1,5 +1,4 @@
 import unittest
-from prettytable import PrettyTable
 
 
 class Product:
@@ -163,11 +162,28 @@ class TuskTest(unittest.TestCase):
         self.store.add(self.p, 10)
 
 
-    def test1(self):
+    def test_add(self):
         self.assertTrue(self.p.name in self.store.products[0]["product"].name, "ni")
 
-    def test2(self):
+    def test_get_product_info(self):
         self.assertEqual(self.store.get_product_info(self.p), "{'product': food, ramen, 'price': 1.95, 'quantity': 10}", "net")
 
-    def test3(self):
+    def test_get_all_product(self):
         self.assertEqual(self.store.get_all_products(), "[{'product': food, ramen, 'price': 1.95, 'quantity': 10}]", "net")
+
+    def test_get_income(self):
+        self.store.sell_product(self.p, 10)
+        self.assertEqual(self.store.get_income(),  19.5)
+
+    def test_add_neg(self):
+        self.assertFalse(self.p.name not in self.store.products[0]["product"].name, "ni")
+
+    def test_get_product_info_neg(self):
+        self.assertFalse(self.store.get_product_info(self.p) == "{'product': fucd, ramen, 'price': 1.5, 'quantity': 11}", "net")
+
+    def test_get_all_product_neg(self):
+        self.assertFalse(self.store.get_all_products() == "[{'product': fcd, rumin, 'price': 1.5, 'quantity': 01}]",
+                         "net")
+    def test_get_income_neg(self):
+        self.store.sell_product(self.p, 10)
+        self.assertFalse(self.store.get_income() ==  15)
