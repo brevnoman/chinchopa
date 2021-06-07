@@ -7,7 +7,7 @@ class Calculator(Ui_MainWindow):
     def setupUi(self, MainWindow):
         super().setupUi(MainWindow)
         self.add_func()
-        self.is_equal = False
+        self.is_equal = True
 
     def add_func(self):
         self.button0.clicked.connect(lambda: self.write_number(self.button0.text()))
@@ -39,15 +39,22 @@ class Calculator(Ui_MainWindow):
             self.label.setText(self.label.text()[0:-1])
         elif number == ".":
             self.label.setText(self.label.text() + number)
-        elif self.label.text() == "0" or self.is_equal or self.label.text() == "+" or self.label.text() == "*" or self.label.text() == "/" or number == " ":
+        elif self.is_equal is True and number.isdecimal():
+            self.label.setText(number)
+            self.is_equal = False
+        elif self.label.text() == "-" and number.isdecimal():
+            self.label.setText(self.label.text()+number)
+            self.is_equal = False
+        elif self.label.text() == "0" or self.label.text() == "+" or self.label.text() == "*" or self.label.text() == "/" or self.label.text() == "-":
             self.label.setText(number)
             self.is_equal = False
         else:
             self.label.setText(self.label.text() + number)
+            self.is_equal = False
 
     def results(self):
         try:
-            res = eval(self.label.text())
+            res = round(eval(self.label.text()),6)
             self.label.setText(str(res))
             self.is_equal = True
         except (SyntaxError, ZeroDivisionError, NameError):
@@ -67,7 +74,7 @@ class Calculator(Ui_MainWindow):
         if btn.text() == "Ok":
             print("Ok")
         elif btn.text() == "Reset":
-            self.label.setText("")
+            self.label.setText("0")
             self.is_equal = False
 
 
