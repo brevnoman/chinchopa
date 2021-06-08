@@ -24,22 +24,15 @@ class Calculator(Ui_MainWindow):
         self.mult_button.clicked.connect(lambda: self.write_number(self.mult_button.text()))
         self.plus_button.clicked.connect(lambda: self.write_number(self.plus_button.text()))
         self.minus_button.clicked.connect(lambda: self.write_number(self.minus_button.text()))
-        self.button_delete.clicked.connect(lambda: self.write_number("-1"))
+        self.button_delete.clicked.connect(lambda: self.clear_lust_character())
         self.button_open_brackets.clicked.connect(lambda: self.write_number(self.button_open_brackets.text()))
         self.button_close_brackets.clicked.connect(lambda: self.write_number(self.button_close_brackets.text()))
-        self.button_dot.clicked.connect(lambda: self.write_number(self.button_dot.text()))
-        self.del_button.clicked.connect(lambda: self.write_number("delete"))
+        self.button_dot.clicked.connect(lambda: self.dot_set())
+        self.del_button.clicked.connect(lambda: self.delete())
         self.button_equal.clicked.connect(self.results)
 
     def write_number(self, number):
-
-        if number == "delete":
-            self.label.setText("0")
-        elif number == "-1":
-            self.label.setText(self.label.text()[0:-1])
-        elif number == ".":
-            self.label.setText(self.label.text() + number)
-        elif self.is_equal is True and number.isdecimal():
+        if self.is_equal is True and number.isdecimal():
             self.label.setText(number)
             self.is_equal = False
         elif self.label.text() == "-" and number.isdecimal():
@@ -51,6 +44,16 @@ class Calculator(Ui_MainWindow):
         else:
             self.label.setText(self.label.text() + number)
             self.is_equal = False
+
+    def dot_set(self):
+        if self.label.text()[-1] not in ["-", "+", "*", "/", "(", ")"]:
+            self.label.setText(self.label.text() + ".")
+
+    def delete(self):
+        self.label.setText("0")
+
+    def clear_lust_character(self):
+        self.label.setText(self.label.text()[0:-1])
 
     def results(self):
         try:
