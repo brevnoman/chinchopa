@@ -13,7 +13,7 @@ class Queue:
     def is_empty(self):
         return self.front == None
 
-    def EnQueue(self, item):
+    def en_queue(self, item):
         temp = Node(item)
         if not self.rear:
             self.front = self.rear = temp
@@ -21,7 +21,7 @@ class Queue:
         self.rear.next = temp
         self.rear = temp
 
-    def DeQueue(self):
+    def de_queue(self):
         if self.is_empty():
             return
         temp = self.front
