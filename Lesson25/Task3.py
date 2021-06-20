@@ -11,7 +11,7 @@ class Queue:
         self.front = self.rear = None
 
     def is_empty(self):
-        return self.front == None
+        return not self.front
 
     def en_queue(self, item):
         temp = Node(item)
