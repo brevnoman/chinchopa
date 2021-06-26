@@ -110,4 +110,3 @@ def new_balance(some_str: str):
         raise Exception("wrong balance")
     return "everything ok"
 
-print(new_balance("(), [{({[]})}{}], []"))
