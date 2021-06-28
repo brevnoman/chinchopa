@@ -13,7 +13,16 @@ class File:
         self.name = name
         self.path = path
 
+    def create_file_if_not_exist(self):
+        with open(os.path.join(self.path, self.name), "w") as file:
+            file.write("")
 
+
+    def get_name(self):
+        return self.name
+
+    def get_path(self):
+        return self.path
 
     def open(self):
         with open(os.path.join(self.path, self.name), "r") as file:
@@ -69,7 +78,8 @@ class File:
 
 
 
-# file = File("main.py" ,"D:\zalupa\drich\Lesson28")
+file = File("main.py" ,"D:\zalupa\drich\Lesson28")
+file.create_file_if_not_exist()
 # file.copy_file("D:\zalupa\drich\Lesson28")
 # file.copy_file("D:\zalupa\drich\Lesson28")
 # file.copy_file("D:\zalupa\drich\Lesson28")
