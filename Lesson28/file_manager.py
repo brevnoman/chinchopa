@@ -78,8 +78,8 @@ class File:
 
 
 
-file = File("main.py" ,"D:\zalupa\drich\Lesson28")
-file.create_file_if_not_exist()
+# file = File("main.py" ,"D:\zalupa\drich\Lesson28")
+# file.create_file_if_not_exist()
 # file.copy_file("D:\zalupa\drich\Lesson28")
 # file.copy_file("D:\zalupa\drich\Lesson28")
 # file.copy_file("D:\zalupa\drich\Lesson28")
