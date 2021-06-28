@@ -33,7 +33,8 @@ def interface():
                        "6.Change path\n"
                        "exit. for exit\n")
         if choose == "1":
-            file.open()
+            for i in file.open():
+                print(i)
         elif choose == "2":
             new_path = input("where do you like to replace file\n")
             file.replace(new_path)

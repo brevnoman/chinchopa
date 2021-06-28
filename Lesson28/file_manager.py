@@ -28,8 +28,9 @@ class File:
         with open(os.path.join(self.path, self.name), "r") as file:
             flag = True
             while flag:
-                for i in range(100):
-                    file.readline()
+                for i in range(1):
+                    text = file.readline()
+                    yield text
                 while True:
                     choose = input("do you want read more? (y/n)\n")
                     if choose == "y":

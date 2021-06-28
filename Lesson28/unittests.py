@@ -29,3 +29,9 @@ class TestFileManager(unittest.TestCase):
         self.file.change_path(os.getcwd()+"\\venv")
         self.file.delete_file()
 
+    def test_open_file(self):
+        self.file.create_file_if_not_exist()
+        with open(self.file.get_name(), "w") as file:
+            file.write("some text")
+        for i in self.file.open():
+            self.assertEqual(i, "some text")
