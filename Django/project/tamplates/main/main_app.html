@@ -1,0 +1,19 @@
+{% extends "main/base.html"%}
+
+{% block title %}
+Main Page
+{% endblock %}
+
+{% block content %}
+{% verbatim %}
+
+    <div class="countainer" id="orders_app">
+        <div class = "btn btn-success btn-lg" v-for="order in orders">
+            Description: {{ order.description }}
+            <br>
+            Amount: {{ order.amount }}
+        </div>
+
+    </div>
+{% endverbatim%}
+{% endblock %}
