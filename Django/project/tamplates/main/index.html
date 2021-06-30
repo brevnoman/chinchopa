@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+
+{% block title %}
+Orders Page
+{% endblock %}
+
+{% block content %}
+    {% for order in orders%}
+        <div class="btn btn-success btn-lg">
+            Amount: {{ order.amount }}
+            <br>
+            Description: {{order.description}}
+        </div>
+    <br><br>
+    {% endfor %}
+{% endblock %}
