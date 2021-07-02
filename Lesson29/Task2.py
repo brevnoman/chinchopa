@@ -2,12 +2,18 @@ from typing import List
 
 
 class PriorityQueue:
-
+    """
+    я посмотрел на код предлагаемой бинарной кучи
+    и понял что ничего не понял, поэтому нашерстил
+    в интернете что такое бинарная куча и как её реализовать,
+    в итоге по своему пониманию сделал её
+    и уже исходя из неё сделал задание(для изменения типа кучи нужно сменить только один знак)
+    """
     def __init__(self) -> None:
         self.heap_list: List[int] = []
 
-    def __swap(self, i) -> None:
-        self.heap_list[i // 2], self.heap_list[i] = self.heap_list[i], self.heap_list[i // 2]
+    def __swap(self, child_index, parent_index) -> None:
+        self.heap_list[child_index], self.heap_list[parent_index] = self.heap_list[parent_index], self.heap_list[child_index]
 
     def __len__(self):
         return len(self.heap_list)
@@ -20,8 +26,8 @@ class PriorityQueue:
     def validate(self, index):
         root_index = (index-1) // 2
         if root_index >= 0:
-            if self.heap_list[index] > self.heap_list[root_index]:
-                self.heap_list[index], self.heap_list[root_index] = self.heap_list[root_index], self.heap_list[index]
+            if self.heap_list[index] > self.heap_list[root_index]:      #в этой строке достаточно сменить ">" на "<" чтобы получить минимальную кучу
+                self.__swap(index, root_index)
                 self.validate(root_index)
 
     def enqueue(self, k) -> None:
