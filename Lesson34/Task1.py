@@ -1,5 +1,6 @@
 from threading import Thread
 
+
 class Counter(Thread):
     counter = 0
     rounds = 100000
