@@ -1,15 +1,8 @@
 def merge_sort(arr):
     if len(arr) > 1:
         mid = len(arr) // 2
-        counter = 0
-        left = []
-        right = []
-        for i in arr:
-            if counter < mid:
-                left.append(i)
-            elif counter >= mid:
-                right.append(i)
-            counter += 1
+        left = arr[: mid]
+        right = arr[mid:]
         merge_sort(left)
         merge_sort(right)
         i = j = k = 0
