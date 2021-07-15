@@ -18,10 +18,10 @@ class BinHeap:
             self.validate(len(self)-1)
 
     def validate(self, index):
-        root_index = (index-1) // 2
+        root_index = (index) // 2
         if root_index >= 0:
             if self.heap_list[index] > self.heap_list[root_index]:
-                self.heap_list[index], self.heap_list[root_index] = self.heap_list[root_index], self.heap_list[index]
+                self.swap(index)
                 self.validate(root_index)
 
     def insert(self, k) -> None:

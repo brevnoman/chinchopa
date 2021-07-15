@@ -51,17 +51,20 @@ class PriorityQueue:
         self.build_queue(new_list)
 
     def dequeue(self, k):
-        found = k
-        counter = 0
-        for j in self.heap_list:
-            if j == found:
-                self.heap_list.pop(counter)
-                break
-            else:
-                counter += 1
-        new_list = self.heap_list
-        self.heap_list = []
-        self.build_queue(new_list)
+        needed = self.heap_list[0]
+        self.delete_max()
+        return needed
+        # found = k
+        # counter = 0
+        # for j in self.heap_list:
+        #     if j == found:
+        #         self.heap_list.pop(counter)
+        #         break
+        #     else:
+        #         counter += 1
+        # new_list = self.heap_list
+        # self.heap_list = []
+        # self.build_queue(new_list)
 
 # queue = PriorityQueue()
 # queue.build_queue([7, 1, 0, 2, 3, 8, 5,6,4,9,11,12,10,14])
