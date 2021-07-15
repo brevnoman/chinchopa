@@ -131,3 +131,28 @@ class UnorderedList:
                 count += 1
         else:
             raise IndexError("Index is out of range")
+
+    def slice(self, start=0, end=None):
+        counter = 0
+        if not end:
+            end = self.size() - 1
+        current = self.head
+        while current is not None:
+            if counter >= end:
+                break
+            elif counter >= start:
+                yield current.get_data()    #если нужно получить список из нодов тогда просто убрать get_data()
+                current = current.get_next()    #есть ещё вариант с возвратом списка со значениями,  но мне чёт так захотелось сделать генератор
+                counter += 1
+            elif counter < start:
+                counter += 1
+                current = current.get_next()
+
+
+unlist = UnorderedList()
+unlist.append(1)
+unlist.append(2)
+unlist.append(3)
+unlist.append(4)
+unlist.append(5)
+print(list(unlist.slice(1,3)))
