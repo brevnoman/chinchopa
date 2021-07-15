@@ -16,13 +16,15 @@ decode = conn.recv(1024)
 
 def coding_cesar(some_byte_str, decode: int)-> str:
     alpha = string.ascii_lowercase
-    new_str = list(some_byte_str.decode())
+    new_str = ""
     counter = 0
-    for i in new_str:
+    for i in some_byte_str.decode():
         if i in alpha:
-            new_str[counter] = alpha[alpha.index(i)+decode]
+            new_str += alpha[alpha.index(i)+decode]
+        else:
+            new_str += i
         counter += 1
-    return "".join(new_str)
+    return new_str
 
 with open(file.decode("utf-8"), "rb") as text:
     while True:
