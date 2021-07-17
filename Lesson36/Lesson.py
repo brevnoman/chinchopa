@@ -21,9 +21,7 @@ class ThreadedServer:
             self.clients.append(conn)
             threading.Thread(target=self.listen_to_client, args=(conn, address)).start()
 
-    def listen_to_client(self, conn, address):
-        print("some_shit")
-        size = 1024
+    def validate_user(self, conn):
         while True:
             username = conn.recv(1024).decode("utf-8")
             if username in self.clients_names:
@@ -31,8 +29,17 @@ class ThreadedServer:
             else:
                 conn.send(b'yeah')
                 username = conn.recv(1024).decode("utf-8")
-                break
-        self.clients_names.append(username)
+                self.clients_names.append(username)
+                return username
+
+
+    def listen_to_client(self, conn, address):
+        print("some_shit")
+        size = 1024
+        username = self.validate_user(conn)
+        with open("chat_story.txt", "r") as old_file:
+            conn.send(old_file.read().encode("utf-8"))
+
         while True:
             try:
                 data = conn.recv(size).decode('utf-8')
@@ -44,6 +51,8 @@ class ThreadedServer:
                             pass
                         else:
                             client.send(f"{username} : {data}".encode("utf-8"))
+                        with open("chat_story.txt", "a") as file:
+                            file.write(f"{username} : {data}\n")
                         
                 else:
                     raise Exception("Ni")
