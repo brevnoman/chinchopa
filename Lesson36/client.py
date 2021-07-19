@@ -15,14 +15,13 @@ def print_to_chat(s):
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.connect((HOST, PORT))
     while True:
+        print("you always can change your name using '/rename'\n")
         username = input("write your username")
         s.send(username.encode("utf-8"))
         validate = s.recv(1024)
         if validate == b"nope":
             print("sry you can't choose this username")
         else:
-            s.send(username.encode("utf-8"))
-
             break
     threading.Thread(target=print_to_chat, args=(s,)).start()
     while True:

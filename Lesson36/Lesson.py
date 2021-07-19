@@ -17,9 +17,25 @@ class ThreadedServer:
         self.sock.listen(5)
         while True:
             conn, address = self.sock.accept()
-            conn.settimeout(60)
+            conn.settimeout(600)
             self.clients.append(conn)
+
             threading.Thread(target=self.listen_to_client, args=(conn, address)).start()
+
+    def rename(self, conn, old_name):
+        while True:
+
+            username = conn.recv(1024).decode("utf-8")
+            if username in self.clients_names:
+                conn.send(b"nope")
+            else:
+                conn.send(b" ")
+                self.clients_names.append(username)
+                for client in self.clients:
+                    client.send(f"{old_name} changed his/her name to {username}".encode("utf-8"))
+                with open("chat_story.txt", "a") as file:
+                    file.write(f"{old_name} changed his/her name to {username}\n")
+                return username
 
     def validate_user(self, conn):
         while True:
@@ -27,11 +43,13 @@ class ThreadedServer:
             if username in self.clients_names:
                 conn.send(b"nope")
             else:
-                conn.send(b'yeah')
-                username = conn.recv(1024).decode("utf-8")
+                conn.send(b" ")
                 self.clients_names.append(username)
+                for client in self.clients:
+                    client.send(f"{username} joined chat".encode("utf-8"))
+                with open("chat_story.txt", "a") as file:
+                    file.write(f"{username} joined chat\n")
                 return username
-
 
     def listen_to_client(self, conn, address):
         print("some_shit")
@@ -45,15 +63,18 @@ class ThreadedServer:
                 data = conn.recv(size).decode('utf-8')
                 
                 if data:
-
-                    for client in self.clients:
-                        if conn == client:
-                            pass
-                        else:
-                            client.send(f"{username} : {data}".encode("utf-8"))
+                    if data == "/rename":
+                        conn.send("choose new name".encode("utf-8"))
+                        username = self.rename(conn, username)
+                    else:
+                        for client in self.clients:
+                            if conn == client:
+                                pass
+                            else:
+                                client.send(f"{username} : {data}".encode("utf-8"))
                         with open("chat_story.txt", "a") as file:
                             file.write(f"{username} : {data}\n")
-                        
+
                 else:
                     raise Exception("Ni")
             except Exception:
