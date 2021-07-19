@@ -1,6 +1,6 @@
 import socket
 import threading
-import time
+import datetime
 
 
 class ThreadedServer:
@@ -53,10 +53,10 @@ class ThreadedServer:
                 return username
 
     def listen_to_client(self, conn, address):
-        print(conn, " connected")
+        print(f"[{datetime.datetime.now()}]", address[0] + ":" + str(address[1]), " connected")
         size = 1024
         username = self.validate_user(conn)
-        print(conn, f" got {username} name")
+        print(f"[{datetime.datetime.now()}]", address[0] + ":" + address[1], f" got {username} name")
         with open("chat_story.txt", "r") as old_file:
             conn.send(old_file.read().encode("utf-8"))
 
