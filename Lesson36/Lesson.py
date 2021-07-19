@@ -35,6 +35,7 @@ class ThreadedServer:
                     client.send(f"{old_name} changed his/her name to {username}".encode("utf-8"))
                 with open("chat_story.txt", "a") as file:
                     file.write(f"{old_name} changed his/her name to {username}\n")
+                self.clients_names.remove(old_name)
                 return username
 
     def validate_user(self, conn):
@@ -52,9 +53,10 @@ class ThreadedServer:
                 return username
 
     def listen_to_client(self, conn, address):
-        print("some_shit")
+        print(conn, " connected")
         size = 1024
         username = self.validate_user(conn)
+        print(conn, f" got {username} name")
         with open("chat_story.txt", "r") as old_file:
             conn.send(old_file.read().encode("utf-8"))
 

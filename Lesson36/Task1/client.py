@@ -28,7 +28,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         validate = s.recv(1024)
         if validate == b"nope":
             print("sry you can't choose this username")
-        else:
+        elif validate == b" ":
             break
     pool = [print_to_chat, listen_chat]
     with concurrent.futures.ThreadPoolExecutor() as executor:
