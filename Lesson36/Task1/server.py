@@ -1,6 +1,6 @@
 import concurrent.futures
 import socket
-
+import datetime
 
 
 
@@ -20,6 +20,7 @@ class MultiprocServer:
         with concurrent.futures.ThreadPoolExecutor(max_workers=num_of_users) as executor:
             while True:
                 conn, address = self.sock.accept()
+                print(address)
                 conn.settimeout(600)
                 self.clients.append(conn)
                 executor.submit(self.listen_to_client, conn, address)
@@ -56,10 +57,10 @@ class MultiprocServer:
                 return username
 
     def listen_to_client(self, conn, address):
-        print(conn.raddr, " connected")
+        print(f"[{datetime.datetime.now()}]", address[0] + ":" + str(address[1]), " connected")
         size = 1024
         username = self.validate_user(conn)
-        print(conn, f" got {username} name")
+        print(f"[{datetime.datetime.now()}]", address[0] + ":" + address[1], f" got {username} name")
         with open("chat_story.txt", "r") as old_file:
             conn.send(old_file.read().encode("utf-8"))
 
