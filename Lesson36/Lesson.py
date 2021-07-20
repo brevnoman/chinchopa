@@ -76,12 +76,13 @@ class ThreadedServer:
 
                 else:
                     break
+        except Exception:
+            conn.send("Error".encode("utf-8"))
         finally:
             print(f"[{datetime.datetime.now()}]", address[0] + ":" + str(address[1]), " disconnected")
             self.clients_names.remove(username)
             self.clients.remove(conn)
             conn.close()
-            return False
 
 if __name__ == '__main__':
     serv = ThreadedServer('127.0.0.1', 65432)
