@@ -63,7 +63,7 @@ def api_delete_post():
 
 
 
-@app.route("/api/posts/<post_id>", methods=["PATCH"])
+@app.route("/api/posts/<post_id><body>", methods=["PATCH"])
 def api_update_post(post_id):
     data = request.get_json()
     post = Posts.query.filter_by(post_id= data.get("post_id")).update({"body": data.get("data")})
@@ -76,6 +76,78 @@ def api_update_post(post_id):
         db.session.rollback()
         return jsonify({"status": "ERROR"})
     return jsonify({"status": "deleted"})
+
+
+@app.route("/api/users", methods=["GET"])
+def api_get_users():
+    users = User.quary.all()
+    return jsonify({"users": users})
+
+
+@app.route("/api/users/<user_id>", methods=["GET"])
+def api_get_user():
+    data = request.get_json()
+    user = User.quary.filter_by(user_id=data.get("user_id")).first()
+    return jsonify({"user": user})
+
+
+@app.route("/api/users/<user_id><about_me>", methods=["PATCH"])
+def api_update_user():
+    data = request.get_json()
+    user = User.quary.filter_by(user_id=data.get("user_id")).update({"about_me": data.get("about_me")})
+    if not user:
+        return jsonify({"status": "ERROR"})
+    db.session.add(user)
+    try:
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+        return jsonify({"status": "ERROR"})
+    return jsonify({"status": "changed"})
+
+
+@app.route("/api/users/<user_id>", methods=["DELETE"])
+def api_delete_user():
+    data = request.get_json()
+    user = User.quary.filter_by(user_id=data.get("user_id")).first()
+    if not user:
+        return jsonify({"status": "ERROR"})
+    db.session.delete(user)
+    try:
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+        return jsonify({"status": "ERROR"})
+    return jsonify({"status": "user deleted"})
+
+
+@app.route("/api/register/<username><email><password>", methods=["POST"])
+def api_register():
+    data = request.get_json()
+    user = User(username=data.get("username"), email=data.get("email"))
+    if not user:
+        return jsonify({"status": "ERROR"})
+    user.set_password(data.get("password"))
+    db.session.add(user)
+    try:
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+        return jsonify({"status": "ERROR"})
+    return jsonify({"status": "user created"})
+
+
+@app.route("/api/login/<username><password><remember_me>", methods=["POST"])
+def api_user_login():
+    data = request.get_json()
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
+    else:
+        user = User.query.filter_by(username=data.get("username")).first()
+        if user is None or not user.check_password(data.get("password")):
+            return jsonify({"status": "wrong username or password"})
+        login_user(user, remember=bool(data.get("remember_me")))
+    return jsonify({"status": "Login successfully"})
 
 
 @app.route('/dinah')
