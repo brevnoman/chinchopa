@@ -65,12 +65,21 @@ def api_delete_post():
 
 @app.route("/api/posts/<post_id>", methods=["PATCH"])
 def api_update_post(post_id):
-    pass
-
+    data = request.get_json()
+    post = Posts.query.filter_by(post_id= data.get("post_id")).update({"body": data.get("data")})
+    if not post:
+        return jsonify({"status": "ERROR"})
+    db.session.delete(post)
+    try:
+        db.session.commit()
+    except Exception:
+        db.session.rollback()
+        return jsonify({"status": "ERROR"})
+    return jsonify({"status": "deleted"})
 
 
 @app.route('/dinah')
-def dinah():
+def idi_nahuy():
     return render_template("dinah.html")
 
 
