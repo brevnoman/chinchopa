@@ -8,7 +8,7 @@ def get_data(url, params):
 
 
 data = get_data("https://api.pushshift.io/reddit/comment/search/",
-                {"subreddit": "Nationals", "sort": "desc", "sort_type": "created_utc", "size": 20})
+                {"subreddit": "Nationals", "sort": "desc", "sort_type": "created_utc"})
 
 with open("reddit.json", "w") as file:
     json.dump(data, file)
