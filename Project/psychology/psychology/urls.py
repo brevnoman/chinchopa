@@ -25,6 +25,6 @@ app_name = "main"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", render_main_page),
-    path("register/", register_page),
+    path("register/", register_page, name="register"),
     path("singin/", sing_in_page)
 ]
