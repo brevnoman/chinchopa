@@ -204,4 +204,6 @@ class Users(Base):
 class ViewMinSal(Base):
     __tablename__ = "view_min_sal"
     job_id = Column(String(10), primary_key=True)
+
     min_sal = Column()
+
